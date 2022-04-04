@@ -11,7 +11,7 @@ Feature: Cadastrar novo usuário para jogar
     When clico em editar informações
     Then sou direcionado para a página de gerenciamento do meu perfil
     When clico em botão editar do campo perfil
-    When preencho os campos cidade , estado , País , sexo e data de nascimento
+    When preencho os campos "cidade" , "estado" , País , sexo e data de nascimento
     And clico no botão alterar perfil
     Then retorno para a página de gerenciamento de perfil
 
