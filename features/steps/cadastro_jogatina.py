@@ -2,7 +2,9 @@ import time
 
 from behave import given, then, when
 from selenium import webdriver
+from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import wait, expected_conditions
 
 
 def before_feature(context, feature):
@@ -84,23 +86,35 @@ def step_impl(context):
 
 @when(u'clico em botão editar do campo perfil')
 def step_impl(context):
-    context.driver.find_element(By.CSS_SELECTOR,
-                                'li.opcoes__item:nth-child(7) div.opcoes__link > a.btn.link-modal').click()
-    time.sleep(7)
+    context.driver.find_element(By.CSS_SELECTOR, '#perfil .btn').click()
+    time.sleep(15)
     print()
 
 @when(u'preencho os campos "cidade" , "estado" , País , sexo e data de nascimento')
 def step_impl(context):
-    time.sleep(7)
+
     #resolver
-    context.driver.find_element(By.CLASS_NAME,
-                                'city').send_keys('Cariacica')
+    context.driver.switch_to.frame(context.driver.find_element(By.XPATH, "//body/div[@id='colorbox']/div[@id='cboxWrapper']/div[2]/div[2]/div[1]/iframe[1]"))
+    #context.driver.switch_to.frame(0)
+    time.sleep(5)
+    context.driver.find_element(By.ID, 'campo-new-city').send_keys('Cariacica')
+    time.sleep(2)
     context.driver.find_element(By.ID, 'campo-new-state').send_keys('Espírito Santo')
-    context.driver.find_element(By.ID, 'country').select_by_visible_text('Brasil')
+    time.sleep(2)
+    dropdown = context.driver.find_element(By.ID, "country")
+    dropdown.find_element(By.XPATH, "//option[. = 'Brasil']").click()
+
+    #context.driver.find_element(By.ID, 'country').select_by_visible_text('Brasil')
+    #context.driver.find_element(By.CSS_SELECTOR, 'input.md-btn.md-btn--primary').click()
+    time.sleep(10)
     context.driver.find_element(By.ID, 'mascGender').click()
-    context.driver.find_element(By.ID, 'birthday').selecy_by_visble_text('2')
-    context.driver.find_element(By.ID, 'birthmonth').selecy_by_visble_text('Abril')
-    context.driver.find_element(By.ID, 'birthyear').selecy_by_visble_text('1988')
+    dropdown = context.driver.find_element(By.ID, "birthday")
+    dropdown.find_element(By.XPATH, "//option[. = '2']").click()
+    dropdown = context.driver.find_element(By.ID, "birthmonth")
+    dropdown.find_element(By.XPATH, "//option[. = 'Abril']").click()
+    dropdown = context.driver.find_element(By.ID, "birthyear")
+    dropdown.find_element(By.XPATH, "//option[. = '1988']").click()
+    time.sleep(3)
 
     ''''# Mapeia as opções de paises
     combo_origem = context.driver.find_element(By.NAME, 'fromPort')
@@ -116,7 +130,7 @@ def step_impl(context):
 
 @when(u'clico no botão alterar perfil')
 def step_impl(context):
-    context.driver.find_element(By.CSS_SELECTOR, 'input.md-btn.md-btn--primary').click()
+
     print()
 
 
