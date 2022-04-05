@@ -87,26 +87,25 @@ def step_impl(context):
 @when(u'clico em botão editar do campo perfil')
 def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, '#perfil .btn').click()
-    time.sleep(15)
+    time.sleep(5)
     print()
 
 @when(u'preencho os campos "cidade" , "estado" , País , sexo e data de nascimento')
 def step_impl(context):
 
-    #resolver
-    context.driver.switch_to.frame(context.driver.find_element(By.XPATH, "//body/div[@id='colorbox']/div[@id='cboxWrapper']/div[2]/div[2]/div[1]/iframe[1]"))
-    #context.driver.switch_to.frame(0)
+    #Mudança o foco para outro frame para correta seleção dos elementos e suas respectivas interações
+    context.driver.switch_to.frame(context.driver.find_element(By.CSS_SELECTOR, "div:nth-child(1) > iframe.cboxIframe"))
     time.sleep(5)
-    context.driver.find_element(By.ID, 'campo-new-city').send_keys('Cariacica')
+    cidade = context.driver.find_element(By.ID, 'campo-new-city')
+    cidade.clear()
+    cidade.send_keys('Cariacica')
     time.sleep(2)
-    context.driver.find_element(By.ID, 'campo-new-state').send_keys('Espírito Santo')
+    estado = context.driver.find_element(By.ID, 'campo-new-state')
+    estado.clear()
+    estado.send_keys('Espírito Santo')
     time.sleep(2)
     dropdown = context.driver.find_element(By.ID, "country")
     dropdown.find_element(By.XPATH, "//option[. = 'Brasil']").click()
-
-    #context.driver.find_element(By.ID, 'country').select_by_visible_text('Brasil')
-    #context.driver.find_element(By.CSS_SELECTOR, 'input.md-btn.md-btn--primary').click()
-    time.sleep(10)
     context.driver.find_element(By.ID, 'mascGender').click()
     dropdown = context.driver.find_element(By.ID, "birthday")
     dropdown.find_element(By.XPATH, "//option[. = '2']").click()
@@ -115,25 +114,30 @@ def step_impl(context):
     dropdown = context.driver.find_element(By.ID, "birthyear")
     dropdown.find_element(By.XPATH, "//option[. = '1988']").click()
     time.sleep(3)
-
-    ''''# Mapeia as opções de paises
-    combo_origem = context.driver.find_element(By.NAME, 'fromPort')
-
-    # Cria um objeto para permitir selecionar um dos paises
-    objeto_origem = Select(combo_origem)
-
-    # Seleciona o paí desejado
-    objeto_origem.select_by_visible_text('Brasil')
-    # objeto_origem.select_by_value(origem)'''
     print()
 
 
 @when(u'clico no botão alterar perfil')
 def step_impl(context):
-
+    context.driver.find_element(By.CSS_SELECTOR, 'input.md-btn.md-btn--primary').click()
+    time.sleep(2)
+    assert context.driver.find_element(By.TAG_NAME, 'span').text == 'Perfil alterado com sucesso'
+    context.driver.switch_to.default_content()
+    context.driver.find_element(By.CSS_SELECTOR, "#cboxClose").click()
+    time.sleep(5)
     print()
 
 
 @then(u'retorno para a página de gerenciamento de perfil')
 def step_impl(context):
+    time.sleep(4)
+    assert context.driver.find_element(By.CSS_SELECTOR,
+                                       'div.opcoes--cadastro__descricao > label:nth-child(2)').text == 'Cariacica'
+    assert context.driver.find_element(By.CSS_SELECTOR,
+                                       'div.opcoes--cadastro__descricao > label:nth-child(6)').text == 'Brasil'
+    assert context.driver.find_element(By.CSS_SELECTOR,
+                                       'div.opcoes--cadastro__descricao > label:nth-child(9)').text == 'Masculino'
+    assert context.driver.find_element(By.CSS_SELECTOR,
+                                       'div.opcoes--cadastro__descricao > label:nth-child(11)').text == '02/04/1988'
+
     print()
