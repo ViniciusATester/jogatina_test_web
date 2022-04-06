@@ -1,5 +1,6 @@
 from selenium import webdriver
 
+#Ambiente de abertura e fechamento do browser
 
 # Inicio
 def before_all(context):
