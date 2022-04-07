@@ -12,5 +12,5 @@ Feature: Cadastrar informações do jogador
 
     Examples:
       | email                       | senha  | usuario                     |
-      | viniciustestes02@tester.com | 123456 | viniciustestes02@tester.com |
-      | viniciustestes03@tester.com | 654321 | viniciustestes03@tester.com |
+      | viniciustestes05@tester.com | 123456 | viniciustestes05@tester.com |
+      | viniciustestes06@tester.com | 654321 | viniciustestes06@tester.com |

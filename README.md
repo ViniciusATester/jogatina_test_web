@@ -7,13 +7,13 @@ e o framework utilizado foi o Selenium Webdriver para a execução dos testes we
 
  As ferramentas utilizadas estão para execução do código são:
 
- -Python 3 , seu download pode ser acessado em python.org
+ -Python 3 , seu download pode ser acessado em <https://www.python.org/>
 
  -IDE utilizada foi o PYCHARM da JetBrains, mas podendo ser outra de sua preferência
  
 -Baixar o arquivo via link abaixo:
 
-
+<https://github.com/ViniciusATester/jogatina_test_web>
 
  -Deverá instalar os plugins e fazer importações 
  * Cucumber
